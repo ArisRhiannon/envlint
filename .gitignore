@@ -1,0 +1,18 @@
+# dependencies
+node_modules/
+bun.lockb
+
+# build output
+/envlint
+dist/
+
+# env & secrets (never commit)
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+
+# os / editor
+.DS_Store
+*.log

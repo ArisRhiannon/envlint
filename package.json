@@ -1,0 +1,20 @@
+{
+  "name": "envlint",
+  "version": "0.1.0",
+  "description": "Zero-dependency CLI that validates .env files against .env.example — catches missing keys, duplicates, empty values and unsafe .gitignore. Built for CI.",
+  "type": "module",
+  "bin": { "envlint": "./src/cli.ts" },
+  "files": ["src", "README.md", "LICENSE"],
+  "scripts": {
+    "test": "bun test",
+    "build": "bun build src/cli.ts --compile --outfile envlint",
+    "start": "bun run src/cli.ts"
+  },
+  "keywords": ["dotenv", "env", "linter", "validator", "ci", "cli", "configuration", "secrets"],
+  "author": "Aris Rhiannon",
+  "license": "MIT",
+  "homepage": "https://github.com/ArisRhiannon/envlint#readme",
+  "repository": { "type": "git", "url": "git+https://github.com/ArisRhiannon/envlint.git" },
+  "bugs": { "url": "https://github.com/ArisRhiannon/envlint/issues" },
+  "engines": { "bun": ">=1.0.0" }
+}
