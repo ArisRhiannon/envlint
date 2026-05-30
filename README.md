@@ -91,6 +91,12 @@ bun run build    # compile a single binary
 
 Issues and pull requests are welcome. Please run `bun test` before submitting.
 
+## Support
+
+No pressure — a star or a helpful issue means a lot. If `envlint` happened to save you
+some time, an optional tip is welcome at `0x4705fA2de020E2D7F7FE08f5dD4585710897f3E1`
+(ETH / any EVM chain).
+
 ## License
 
 [MIT](LICENSE) © Aris Rhiannon
