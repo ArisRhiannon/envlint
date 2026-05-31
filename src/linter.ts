@@ -88,7 +88,11 @@ export function lint(input: LintInput): LintResult {
     if (annotations.size) {
       for (const entry of env.entries) {
         const ann = annotations.get(entry.key);
-        if (ann && entry.value !== "") {
+        if (!ann) continue;
+        for (const directive of ann.unknown ?? []) {
+          findings.push({ severity: "warning", rule: "invalid-annotation", message: `Unknown annotation "@${directive}" for "${entry.key}" — expected @type, @enum, or @pattern`, key: entry.key, line: entry.line });
+        }
+        if (entry.value !== "") {
           const problem = validateValue(entry.value, ann);
           if (problem) findings.push({ severity: "error", rule: "invalid-value", message: `"${entry.key}" ${problem}`, key: entry.key, line: entry.line });
         }

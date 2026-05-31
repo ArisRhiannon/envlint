@@ -3,7 +3,7 @@ import { existsSync, readFileSync } from "node:fs";
 import { lint, type LintResult } from "./linter.ts";
 import { loadConfig } from "./config.ts";
 
-const VERSION = "0.2.0";
+const VERSION = "1.0.0";
 
 const HELP = `envlint v${VERSION} — validate .env files against .env.example, for CI and local dev.
 
@@ -25,6 +25,11 @@ Examples:
   envlint .env.production      check a specific file
   envlint .env .env.local      check several files at once
   envlint --strict --json      machine-readable output for CI
+
+Schema (optional, declared in the example file):
+  # @type url|int|number|port|bool|email
+  # @enum a,b,c
+  # @pattern <regex>
 
 Exit codes:
   0  no errors    1  errors found    2  usage error`;
@@ -109,7 +114,7 @@ if (format === "json") {
       console.log(`${tag} ${f.rule}: ${f.message}${loc}`);
     }
     if (result.findings.length === 0) console.log(`\u2714 ${file}: no issues found`);
-    else console.log(`${result.errorCount} error(s), ${result.warningCount} warning(s)`);
+    else if (!cli.quiet || result.errorCount > 0) console.log(`${result.errorCount} error(s), ${result.warningCount} warning(s)`);
   }
 }
 

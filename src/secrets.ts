@@ -34,6 +34,15 @@ export function looksLikeSecret(value: string): boolean {
   const v = value.trim();
   if (v.length < 8 || PLACEHOLDER.test(v)) return false;
   if (KNOWN_SECRET_PATTERNS.some((re) => re.test(v))) return true;
+  if (isUrl(v)) return false; // URLs / connection strings are out of scope (see README)
   // High-entropy, space-free token that is long enough to be a real credential.
   return !/\s/.test(v) && v.length >= 24 && shannonEntropy(v) >= 4.0;
+}
+
+function isUrl(v: string): boolean {
+  try {
+    return new URL(v).protocol !== "";
+  } catch {
+    return false;
+  }
 }

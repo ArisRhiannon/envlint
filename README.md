@@ -78,6 +78,7 @@ $ envlint
 | `invalid-value` | error | A `.env` value violates a `@type`/`@enum`/`@pattern` annotation |
 | `extra-key` | warning | A key in `.env` is not present in the example file |
 | `empty-value` | warning | A key has an empty value (becomes an error with `--strict`) |
+| `invalid-annotation` | warning | An unrecognized `@directive` in the example (likely a typo) |
 
 ## Schema annotations
 
@@ -165,6 +166,38 @@ jobs:
 | `0` | No errors |
 | `1` | Errors found |
 | `2` | Usage error |
+
+## Limitations
+
+envlint is a fast, offline, heuristic linter — not a secrets scanner or a runtime
+validator. Specifically:
+
+- **`exposed-secret` is best-effort.** It catches known token formats (AWS, GitHub,
+  Slack, Stripe, Google, JWTs, PEM keys) and high-entropy strings, but it is a
+  heuristic: it will miss low-entropy or unusual secrets, and **does not inspect
+  URLs or connection strings** (to avoid false positives on templates like
+  `postgres://user:password@localhost/db`). Use a dedicated scanner (e.g.
+  `gitleaks`, `trufflehog`) for real secret-leak prevention.
+- **`gitignore-unsafe` matches common patterns**, not the full gitignore grammar.
+- **Schema annotations are static checks**, not a runtime validator. Use `envalid`,
+  `zod`, or `env-schema` if you need typed env access inside your application.
+- envlint does not load, expand (`${VAR}`), or evaluate your environment.
+
+## Stability
+
+`1.x` follows [SemVer](https://semver.org/). The stable public surface is:
+
+- **CLI:** the documented flags, the `text`/`json`/`github` output formats, and the
+  exit codes (`0`/`1`/`2`).
+- **JSON output:** an array of `{ file, findings, errorCount, warningCount }`;
+  each finding has `{ severity, rule, message, key?, line? }`.
+- **Library:** the exports `lint`, `parseEnv`, `loadConfig`, `parseAnnotations`,
+  `validateValue`, `looksLikeSecret`, and their types.
+- **Rule names** are stable; new rules may be added in minor releases (default
+  severities of existing rules will not change in a way that turns a passing run
+  into a failing one within `1.x`).
+
+Anything not listed here is internal and may change without a major bump.
 
 ## Development
 

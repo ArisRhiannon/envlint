@@ -4,6 +4,29 @@ All notable changes to this project are documented here. The format is based on
 [Keep a Changelog](https://keepachangelog.com/) and this project adheres to
 [Semantic Versioning](https://semver.org/).
 
+## [1.0.0] - 2026-05-31
+
+First stable release. Commits to a public API surface under SemVer — see the
+"Stability" section of the README. Published as `@arisrhiannon/envlint`.
+
+### Added
+
+- `invalid-annotation` rule: unrecognized `@directives` in the example (e.g. a
+  misspelled `@typ`) now produce a warning instead of being silently ignored.
+- `## Limitations` and `## Stability` sections in the README.
+- 13 adversarial tests (ReDoS guard, unknown directives, URL strictness, secret
+  false-positive/negative corpus, BOM/CRLF parsing).
+
+### Fixed
+
+- **ReDoS:** a pathological `@pattern` (e.g. `(a+)+$`) could hang the process.
+  Patterns with nested unbounded quantifiers are now rejected, and the tested
+  value length is capped.
+- **`@type url`** now requires an `http`/`https` scheme and a host, rejecting
+  values like `javascript:alert(1)`.
+- **`exposed-secret`** no longer false-positives on URLs / connection strings.
+- `--quiet` no longer prints a summary line when there is nothing to report.
+
 ## [0.2.0] - 2026-05-31
 
 ### Changed

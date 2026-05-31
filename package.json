@@ -1,6 +1,6 @@
 {
   "name": "@arisrhiannon/envlint",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "description": "Zero-dependency CLI + library that lints .env files against .env.example: missing/duplicate/empty keys, unsafe .gitignore, secrets leaked into examples, and schema-as-comments type validation. Runs on Node, built for CI.",
   "type": "module",
   "bin": {

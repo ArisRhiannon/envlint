@@ -37,3 +37,9 @@ jobs:
         with:
           node-version: "18"
       - run: node dist/cli.js --version
+      - name: Lint a sample project on Node 18
+        run: |
+          printf 'A=1\nB=2\n' > .env
+          printf 'A=\nB=\n' > .env.example
+          printf '.env\n' > .gitignore
+          node dist/cli.js --strict
