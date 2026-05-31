@@ -3,12 +3,12 @@
 > Zero-dependency CLI + library that validates your `.env` against `.env.example` — catch missing keys, duplicates, empty values and an unsafe `.gitignore` **before** they break a deploy.
 
 [![CI](https://github.com/ArisRhiannon/envlint/actions/workflows/ci.yml/badge.svg)](https://github.com/ArisRhiannon/envlint/actions/workflows/ci.yml)
-[![npm](https://img.shields.io/npm/v/envlint.svg)](https://www.npmjs.com/package/envlint)
+[![npm](https://img.shields.io/npm/v/@arisrhiannon/envlint.svg)](https://www.npmjs.com/package/@arisrhiannon/envlint)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
 Misconfigured environment variables are one of the most common causes of "works on my machine" bugs and broken production deploys. `envlint` is a tiny, fast checker that drops into local workflows and CI.
 
-- **Runs on Node.** Pure JavaScript on install — `npx envlint`, no Bun, Rust, or system binary required.
+- **Runs on Node.** Pure JavaScript on install — `npx @arisrhiannon/envlint`, no Bun, Rust, or system binary required.
 - **Zero runtime dependencies.** Nothing pulled into your supply chain. Fully offline — never makes a network request.
 - **CI-friendly.** Clear exit codes, `--json`, and native GitHub Actions annotations.
 - **Safe by default.** Warns when `.env` isn't ignored by Git.
@@ -32,13 +32,13 @@ Three things no other `.env` checker does — all static, offline, and zero-depe
 
 ```sh
 # one-off, no install
-npx envlint
+npx @arisrhiannon/envlint
 
 # or install globally
-npm install -g envlint
+npm install -g @arisrhiannon/envlint
 
 # or as a dev dependency / library
-npm install -D envlint
+npm install -D @arisrhiannon/envlint
 ```
 
 Requires Node.js >= 18.
@@ -127,7 +127,7 @@ take precedence over the config file.
 ## Programmatic API
 
 ```ts
-import { lint } from "envlint";
+import { lint } from "@arisrhiannon/envlint";
 import { readFileSync } from "node:fs";
 
 const result = lint({
@@ -155,7 +155,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - run: npx --yes envlint --strict --format github
+      - run: npx --yes @arisrhiannon/envlint --strict --format github
 ```
 
 ## Exit codes
