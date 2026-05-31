@@ -1,9 +1,7 @@
 # dependencies
 node_modules/
-bun.lockb
 
 # build output
-/envlint
 dist/
 
 # env & secrets (never commit)

@@ -13,9 +13,9 @@ const LINE_RE = /^\s*(?:export\s+)?([A-Za-z_][A-Za-z0-9_]*)\s*=(.*)$/;
 
 function parseValue(raw: string): string {
   const v = raw.trim();
-  if (v[0] === '"' || v[0] === "'") {
-    const quote = v[0];
-    const end = v.indexOf(quote, 1);
+  const first = v[0];
+  if (first === '"' || first === "'") {
+    const end = v.indexOf(first, 1);
     return end === -1 ? v.slice(1) : v.slice(1, end);
   }
   const comment = v.indexOf(" #");
@@ -31,13 +31,13 @@ export function parseEnv(content: string): ParseResult {
   content.split(/\r?\n/).forEach((raw, index) => {
     const trimmed = raw.trim();
     if (!trimmed || trimmed.startsWith("#")) return;
-    const match = raw.match(LINE_RE);
+    const match = LINE_RE.exec(raw);
     if (!match) return;
-    const key = match[1];
+    const key = match[1]!;
     const line = index + 1;
     if (seen.has(key)) duplicates.push({ key, line });
     seen.add(key);
-    entries.push({ key, value: parseValue(match[2]), line });
+    entries.push({ key, value: parseValue(match[2] ?? ""), line });
   });
 
   return { entries, duplicates };

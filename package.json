@@ -1,20 +1,65 @@
 {
   "name": "envlint",
-  "version": "0.1.0",
-  "description": "Zero-dependency CLI that validates .env files against .env.example — catches missing keys, duplicates, empty values and unsafe .gitignore. Built for CI.",
+  "version": "0.2.0",
+  "description": "Zero-dependency CLI + library that lints .env files against .env.example: missing/duplicate/empty keys, unsafe .gitignore, secrets leaked into examples, and schema-as-comments type validation. Runs on Node, built for CI.",
   "type": "module",
-  "bin": { "envlint": "./src/cli.ts" },
-  "files": ["src", "README.md", "LICENSE"],
-  "scripts": {
-    "test": "bun test",
-    "build": "bun build src/cli.ts --compile --outfile envlint",
-    "start": "bun run src/cli.ts"
+  "bin": {
+    "envlint": "dist/cli.js"
   },
-  "keywords": ["dotenv", "env", "linter", "validator", "ci", "cli", "configuration", "secrets"],
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "test": "node --test",
+    "start": "node src/cli.ts",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "dotenv",
+    "env",
+    "linter",
+    "validator",
+    "ci",
+    "cli",
+    "configuration",
+    "secrets",
+    "secret-detection",
+    "env-schema",
+    "dotenv-linter",
+    "environment-variables",
+    "github-actions"
+  ],
   "author": "Aris Rhiannon",
-  "license": "SEE LICENSE IN LICENSE",
+  "license": "MIT",
   "homepage": "https://github.com/ArisRhiannon/envlint#readme",
-  "repository": { "type": "git", "url": "git+https://github.com/ArisRhiannon/envlint.git" },
-  "bugs": { "url": "https://github.com/ArisRhiannon/envlint/issues" },
-  "engines": { "bun": ">=1.0.0" }
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ArisRhiannon/envlint.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ArisRhiannon/envlint/issues"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "@types/node": "^25.9.1",
+    "typescript": ">=5.7.0"
+  }
 }
