@@ -12,7 +12,7 @@
   },
   "keywords": ["dotenv", "env", "linter", "validator", "ci", "cli", "configuration", "secrets"],
   "author": "Aris Rhiannon",
-  "license": "MIT",
+  "license": "SEE LICENSE IN LICENSE",
   "homepage": "https://github.com/ArisRhiannon/envlint#readme",
   "repository": { "type": "git", "url": "git+https://github.com/ArisRhiannon/envlint.git" },
   "bugs": { "url": "https://github.com/ArisRhiannon/envlint/issues" },

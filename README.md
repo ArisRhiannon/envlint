@@ -3,7 +3,7 @@
 > Zero-dependency CLI that validates your `.env` against `.env.example` — catch missing keys, duplicates, empty values and an unsafe `.gitignore` **before** they break a deploy.
 
 [![CI](https://github.com/ArisRhiannon/envlint/actions/workflows/ci.yml/badge.svg)](https://github.com/ArisRhiannon/envlint/actions/workflows/ci.yml)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![License: AGPL-3.0 + Commercial](https://img.shields.io/badge/license-AGPL--3.0%20%2B%20Commercial-blue.svg)](LICENSE)
 
 Misconfigured environment variables are one of the most common causes of "works on my machine" bugs and broken production deploys. `envlint` is a tiny, fast checker that drops into local workflows and CI.
 
@@ -99,4 +99,8 @@ some time, an optional tip is welcome at `0x4705fA2de020E2D7F7FE08f5dD4585710897
 
 ## License
 
-[MIT](LICENSE) © Aris Rhiannon
+Source-available — **not** OSI open source. Free under the GNU **AGPL-3.0** for
+individuals, non-profits, and organizations below **US$1M annual revenue and 50
+employees**; larger organizations require a commercial license. See [LICENSE](LICENSE).
+
+© 2026 Aris Rhiannon
